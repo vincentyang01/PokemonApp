@@ -1,3 +1,22 @@
+README
+This CLI App was made as the Mod 1 Final Project for the Flatiron Boocamp Software Engineer course.
+
+This a Pokemon app made with data from a JSON file of Generation 1 Pokemon. It is written in Ruby and allows users to search, find/filter, and compare Pokemon. 
+
+To install, clone the repo, and 'bundle install' in order to resolve dependencies. Migrate the database with 'rake db:migrate' and seed the data with 'rake db:seed'. Start up the application by running 'ruby tools/run.rb'.
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Module One Final Project Guidelines
 
 Congratulations, you're at the end of module one! You've worked crazy hard to get here and have learned a ton.
@@ -57,3 +76,4 @@ Projects need to be approved prior to launching into them, so take some time to 
 # in config/environment.rb add this line:
 ActiveRecord::Base.logger = nil
 ```
+
