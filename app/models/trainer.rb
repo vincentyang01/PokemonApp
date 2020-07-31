@@ -3,9 +3,48 @@ class Trainer < ActiveRecord::Base
     has_many :pokemon_species, through: :instances
     
     def self.login
+
+        printf("\t                       _\n");                             
+        printf("\t            _,..-\"\"\"--' `,.-\".\n");
+        printf("\t          ,'      __.. --',  |\n");
+        printf("\t        _/   _.-\"' |    .' | |       ____\n");
+        printf("\t  ,.-\"\"'    `-\"+.._|     `.' | `-..,',--.`.\n");
+        printf("\t |   ,.                      '    j 7    l \\__\n");
+        printf("\t |.-'                            /| |    j||  .\n");
+        printf("\t `.                   |         / L`.`\"\"','|\\  \\\n");
+        printf("\t   `.,----..._       ,'`\"'-.  ,'   \\ `\"\"'  | |  l\n");
+        printf("\t     Y        `-----'       v'    ,'`,.__..' |   .\n");
+        printf("\t      `.                   /     /   /     `.|   |\n");
+        printf("\t        `.                /     l   j       ,^.  |L\n");
+        printf("\t          `._            L       +. |._   .' \\|  | \\\n");
+        printf("\t            .`--...__,..-'\"\"'-._  l L  \"\"\"    |  |  \\\n");
+        printf("\t          .'  ,`-......L_       \\  \\ \\     _.'  ,'.  l\n");
+        printf("\t       ,-\"`. / ,-.---.'  `.      \\  L..--\"'  _.-^.|   l\n");
+        printf("\t .-\"\".'\"`.  Y  `._'   '    `.     | | _,.--'\"     |   |\n");
+        printf("\t  `._'   |  |,-'|      l     `.   | |\"..          |   l\n");
+        printf("\t  ,'.    |  |`._'      |      `.  | |_,...---\"\"\"\"\"`    L\n");
+        printf("\t /   |   j _|-' `.     L       | j ,|              |   |\n");
+        printf("\t`--,\"._,-+' /`---^..../._____,.L',' `.             |\\  |\n");
+        printf("\t   |,'      L                   |     `-.          | \\j\n");
+        printf("\t            .                    \\       `,        |  |\n");
+        printf("\t             \\                __`.Y._      -.     j   |\n");
+        printf("\t              \\           _.,'       `._     \\    |  j\n");
+        printf("\t              ,-\"`-----\"\"\"\"'           |`.    \\  7   |\n");
+        printf("\t             /  `.        '            |  \\    \\ /   |\n");
+        printf("\t            |     `      /             |   \\    Y    |\n");
+        printf("\t            |      \\    .             ,'    |   L_.-')\n");
+        printf("\t             L      `.  |            /      ]     _.-^._\n");
+        printf("\t              \\   ,'  `-7         ,-'      / |  ,'      `-._\n");
+        printf("\t             _,`._       `.   _,-'        ,',^.-            `.\n");
+        printf("\t          ,-'     v....  _.`\"',          _:'--....._______,.-'\n");
+        printf("\t        ._______./     /',,-'\"'`'--.  ,-'  `.\n");
+        printf("\t                 \"\"\"\"\"`.,'         _\\`----...' mh\n");
+        printf("\t                        --------\"\"'\n");
+
         puts "Hello there! Welcome to the world of pokémon! My name is Oak! People call me the pokémon Prof! 
         This world is inhabited by creatures called pokémon! For some people, pokémon are pets. Others use them for fights. 
         Myself...I study pokémon as a profession.
+        
         
         First, what is your name?"
         name = STDIN.gets.chomp.downcase
@@ -33,6 +72,7 @@ class Trainer < ActiveRecord::Base
             puts "Pokemon Species ID: \t" + owned[i].pokemon_species_id.to_s
             puts "Pokemon ID: \t\t" + owned[i].id.to_s
             puts "TrainerID: \t\t" + owned[i].trainer_id.to_s
+            puts "Type: \t\t\t" + owned[i].element
             puts "HP: \t\t\t" + owned[i].hp.to_s
             puts "Attack: \t\t" + owned[i].atk.to_s
             puts "Defense: \t\t" + owned[i].def.to_s
@@ -53,9 +93,15 @@ class Trainer < ActiveRecord::Base
     end
 
     def pokemonYouHaveLeft
-        count = 151
         count2 = (self.instances).count
-        puts count - count2
+        count = 151 - count2
+        puts "
+            -----------------------------
+            POKEDEX
+            Pokemon captured        #{count2}
+            Pokemon remaining       #{count}
+            -----------------------------
+        "
     end
 
     def oneVsOne(first,second) #Tashawn / Ian - Due to a missing variables in our schema, 
@@ -63,8 +109,6 @@ class Trainer < ActiveRecord::Base
         secondPokemon = PokemonSpecies.find_by(name:second)
         firstId = firstPokemon.id
         secondId = secondPokemon.id
-        # firstType = firstPokemon.element
-        # secondType = secondPokemon.element
         firstPokemon = self.instances.find_by(pokemon_species_id: firstId)
         secondPokemon = self.instances.find_by(pokemon_species_id: secondId)
 
@@ -95,7 +139,9 @@ class Trainer < ActiveRecord::Base
         
 
         #############
-        puts "
+        puts "\n\n\n
+        -----------------------------
+        Battle Breakdown
         -----------------------------
         Pokemon Name: \t\t\t #{first} \t #{second}           
         Element: \t\t\t #{firstPokemon.element} \t #{secondPokemon.element}
@@ -112,15 +158,10 @@ class Trainer < ActiveRecord::Base
         
         - #{topdef} will have the stronger defense.
 
-        - #{topspecatk} goes *Pew*Pew*Pew*. SAY HELLO TO MY LITTLE FRIEND!
+        - #{topspecatk}: #{topspecatk} GO RAWR *Pew*Pew*Pew*.
         
         - The #{topspecdef} will win according to Special Defense stats. 
 
-        - The first attack will go to #{topspeed}."
-        
-        
-        
-
-         binding.pry
+        - The first attack goes to #{topspeed}."
     end
 end

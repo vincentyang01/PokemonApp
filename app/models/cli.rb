@@ -10,10 +10,17 @@ class CLI
             elementArray = ["grass", "poison", "fire", "flying", "water", "bug", "normal", "electric", "ground", "fighting", "psychic", "rock", "ghost", "dragon", "ice"].sort
             statsArray = ["hp", "attack", "defense", "spec_atk", "spec_def", "speed"]
 
+
+
+    
+
+
             puts "
-            Thank you for using the Pokedex simulator. \n\n
-            Please type in the name of a Pokemonn to add it to your Pokedex.
-            Enter 'view' to view the current Pokemonn in your Pokedex.
+            ------------------------------------------
+            Thank you for using the Pokedex simulator. 
+            ------------------------------------------\n\n
+            Please type in the name of a Pokemon to add it to your Pokedex.
+            Enter 'view' to view the current Pokemon in your Pokedex.
             Enter 'delete' to remove a Pokemon from your Pokedex.
 
             Please see the below options if you need to sift through all of the options.
@@ -47,6 +54,7 @@ class CLI
             
                 
             elsif elementArray.include?(selection)
+                puts "fighting"
                 pokemonWithElement(selection)
 
 
@@ -72,11 +80,23 @@ class CLI
 
 
             elsif selection == "view"
-                trainer.ownedPokemon
-
+                if calledPokemon.length == 0
+                    puts "
+                            ------------------------------
+            Invalid entry. Please have at least one Pokemon on your team to view.
+                            ------------------------------\n\n\n"
+                else
+                    trainer.ownedPokemon
+                end
 
 
             elsif selection == "delete"
+                if calledPokemon.length == 0
+                    puts "
+                        ------------------------------------------------------------
+            Invalid entry. Please have at least one Pokemon on your team to delete something.
+                        ------------------------------------------------------------\n\n\n"
+                else
                 puts "Please select the Pokemon that you would like to remove from the Pokedex.
                 This is your current Pokemon in your Pokedex: #{calledPokemon}"
                 rmMon = STDIN.gets.chomp # <= Holds Pikachu
@@ -90,11 +110,15 @@ class CLI
                     puts "Pokemon #{rmMon} has been removed from your Pokedex.
                     This is your current Pokemon in your Pokedex: #{calledPokemon}"
                 end
+            end
 
             elsif selection == "battle"
                 if calledPokemon.length < 2
-                    puts "Please add additional Pokemon to your team."
-                end 
+                    puts puts "\n
+                        ------------------------------
+            Invalid entry. Please have at least two Pokemon to battle.
+                        ------------------------------\n"
+                else
                 puts "Please select your first Pokemon: 
                 #{calledPokemon}"
                 first = STDIN.gets.chomp
@@ -102,6 +126,7 @@ class CLI
                 #{calledPokemon.reject{|a|a==first}}"
                 second = STDIN.gets.chomp
                 trainer.oneVsOne(first,second)
+                end
             elsif selection == "exit"
                 exit!
             elsif puts "
@@ -149,38 +174,38 @@ class CLI
         if a == "<" 
             if stat == "hp"
                 PokemonSpecies.all.select do |pokemon|
-                    operationArr << pokemon.name if pokemon.hp < inequality.to_i
+                    operationArr << "#{pokemon.id}.\t#{pokemon.name}" if pokemon.hp < inequality.to_i
                 end
                 puts "-----------"
                 puts operationArr
 
             elsif stat == "attack"
                 PokemonSpecies.all.select do |pokemon|
-                    operationArr << pokemon.name if pokemon.attack < inequality.to_i
+                    operationArr << "#{pokemon.id}.\t#{pokemon.name}" if pokemon.attack < inequality.to_i
                 end
                 puts "-----------"
                 puts operationArr
             elsif stat == "defense"
                 PokemonSpecies.all.select do |pokemon|
-                    operationArr << pokemon.name if pokemon.defense < inequality.to_i
+                    operationArr << "#{pokemon.id}.\t#{pokemon.name}" if pokemon.defense < inequality.to_i
                 end
                 puts "-----------"
                 puts operationArr
             elsif stat == "spec_atk"
                 PokemonSpecies.all.select do |pokemon|
-                    operationArr << pokemon.name if pokemon.spec_atk < inequality.to_i
+                    operationArr << "#{pokemon.id}.\t#{pokemon.name}" if pokemon.spec_atk < inequality.to_i
                 end
                 puts "-----------"
                 puts operationArr
             elsif stat == "spec_def"
                 PokemonSpecies.all.select do |pokemon|
-                    operationArr << pokemon.name if pokemon.spec_def < inequality.to_i
+                    operationArr << "#{pokemon.id}.\t#{pokemon.name}" if pokemon.spec_def < inequality.to_i
                 end
                 puts "-----------"
                 puts operationArr
             elsif stat == "speed"
                 PokemonSpecies.all.select do |pokemon|
-                    operationArr << pokemon.name if pokemon.speed < inequality.to_i
+                    operationArr << "#{pokemon.id}.\t#{pokemon.name}" if pokemon.speed < inequality.to_i
                 end
                 puts "-----------"
                 puts operationArr
@@ -188,37 +213,37 @@ class CLI
         elsif a == ">"
             if stat == "hp"
                 PokemonSpecies.all.select do |pokemon|
-                    operationArr << pokemon.name if pokemon.hp > inequality.to_i
+                    operationArr << "#{pokemon.id}.\t#{pokemon.name}" if pokemon.hp > inequality.to_i
                 end
                 puts "-----------"
                 puts operationArr
             elsif stat == "attack"
                 PokemonSpecies.all.select do |pokemon|
-                    operationArr << pokemon.name if pokemon.attack > inequality.to_i
+                    operationArr << "#{pokemon.id}.\t#{pokemon.name}" if pokemon.attack > inequality.to_i
                 end
                 puts "-----------"
                 puts operationArr
             elsif stat == "defense"
                 PokemonSpecies.all.select do |pokemon|
-                    operationArr << pokemon.name if pokemon.defense > inequality.to_i
+                    operationArr << "#{pokemon.id}.\t#{pokemon.name}" if pokemon.defense > inequality.to_i
                 end
                 puts "-----------"
                 puts operationArr
             elsif stat == "spec_atk"
                 PokemonSpecies.all.select do |pokemon|
-                    operationArr << pokemon.name if pokemon.spec_atk > inequality.to_i
+                    operationArr << "#{pokemon.id}.\t#{pokemon.name}" if pokemon.spec_atk > inequality.to_i
                 end
                 puts "-----------"
                 puts operationArr
             elsif stat == "spec_def"
                 PokemonSpecies.all.select do |pokemon|
-                    operationArr << pokemon.name if pokemon.spec_def > inequality.to_i
+                    operationArr << "#{pokemon.id}.\t#{pokemon.name}" if pokemon.spec_def > inequality.to_i
                 end
                 puts "-----------"
                 puts operationArr
             elsif stat == "speed"
                 PokemonSpecies.all.select do |pokemon|
-                    operationArr << pokemon.name if pokemon.speed > inequality.to_i
+                    operationArr << "#{pokemon.id}.\t#{pokemon.name}" if pokemon.speed > inequality.to_i
                 end
                 puts "-----------"
                 puts operationArr
@@ -226,37 +251,37 @@ class CLI
         elsif a == "="
             if stat == "hp"
                 PokemonSpecies.all.select do |pokemon|
-                    operationArr << pokemon.name if pokemon.hp == inequality.to_i
+                    operationArr << "#{pokemon.id}.\t#{pokemon.name}" if pokemon.hp == inequality.to_i
                 end
                 puts "-----------"
                 puts operationArr
             elsif stat == "attack"
                 PokemonSpecies.all.select do |pokemon|
-                    operationArr << pokemon.name if pokemon.attack == inequality.to_i
+                    operationArr << "#{pokemon.id}.\t#{pokemon.name}" if pokemon.attack == inequality.to_i
                 end
                 puts "-----------"
                 puts operationArr
             elsif stat == "defense"
                 PokemonSpecies.all.select do |pokemon|
-                    operationArr << pokemon.name if pokemon.defense == inequality.to_i
+                    operationArr << "#{pokemon.id}.\t#{pokemon.name}" if pokemon.defense == inequality.to_i
                 end
                 puts "-----------"
                 puts operationArr
             elsif stat == "spec_atk"
                 PokemonSpecies.all.select do |pokemon|
-                    operationArr << pokemon.name if pokemon.spec_atk == inequality.to_i
+                    operationArr << "#{pokemon.id}.\t#{pokemon.name}" if pokemon.spec_atk == inequality.to_i
                 end
                 puts "-----------"
                 puts operationArr
             elsif stat == "spec_def"
                 PokemonSpecies.all.select do |pokemon|
-                    operationArr << pokemon.name if pokemon.spec_def == inequality.to_i
+                    operationArr << "#{pokemon.id}.\t#{pokemon.name}" if pokemon.spec_def == inequality.to_i
                 end
                 puts "-----------"
                 puts operationArr
             elsif stat == "speed"
                 PokemonSpecies.all.select do |pokemon|
-                    operationArr << pokemon.name if pokemon.speed == inequality.to_i
+                    operationArr << "#{pokemon.id}.\t#{pokemon.name}" if pokemon.speed == inequality.to_i
                 end
                 puts "-----------"
                 puts operationArr
